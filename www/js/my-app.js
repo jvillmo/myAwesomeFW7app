@@ -12,6 +12,23 @@ var mainView = myApp.addView('.view-main', {
 
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
+	
+	var requestAjax = jQuery.ajax({
+		dataType:'html',
+		url:"http://www.colypro.com/revista/edicion/xxxvi",
+		success:function(data){
+				jQuery(".item-subtitle").append(data);
+		}
+	});
+	
+	requestAjax.done(function( msg ) {
+	  console.log(msg);
+	});
+	 
+	requestAjax.fail(function( jqXHR, textStatus ) {
+	  console.log(textStatus);
+	});	
+		
 	// run createContentPage func after link was clicked
     $$('.create-page').on('click', function () {
         createContentPage();
